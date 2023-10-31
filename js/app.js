@@ -57,11 +57,12 @@ function totalSales(arr) {
   return sum;
 }
 
-const locationContainerElementSales = document.getElementById("locationSales");
+const locationContainerElement = document.getElementById("locationSales");
 
 function renderSalesData(location) {
+  // create new elements
   const article = document.createElement("article");
-  locationContainerElementSales.appendChild(article);
+  locationContainerElement.appendChild(article);
 
   const h2 = document.createElement("h2");
   h2.textContent = location.name;
@@ -73,6 +74,7 @@ function renderSalesData(location) {
   for (let i = 0; i < location.hourlyCookies.length; i++) {
     const li = document.createElement("li");
     li.textContent = time[i] + ": " + location.hourlyCookies[i];
+    li.classList.add("sales-data");
     ul.appendChild(li);
   }
 }
