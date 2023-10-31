@@ -33,7 +33,17 @@ CookieStand.prototype.estimate = function() {
 };
 
 const seattle = new CookieStand('Seattle', 23, 65, 6.3, 0);
-console.log(seattle);
+const tokyo = new CookieStand('Toyko', 3, 24, 1.2, 0);
+const dubai = new CookieStand('Dubai', 11, 38, 3.7);
+const paris = new CookieStand('Paris', 20, 38, 2.3);
+const lima = new CookieStand('Lima', 2, 16, 4.6);
+
+// console.log(seattle);
+// console.log(tokyo);
+// console.log(dubai);
+// console.log(paris);
+// console.log(lima);
+
 
 // helper function - Randomly generate number
 function random(min, max) {
@@ -50,6 +60,49 @@ function esimateSales(store) {
   }
   return hourlyCookies;
 }
+
+
+
+const locationContainerElement = document.getElementById("locationSales");
+// create element
+// appendChild to element
+// add text to element
+
+function renderSalesData(store) {
+  // create new elements
+  const article = document.createElement("article");
+  locationContainerElement.appendChild(article);
+
+  const cityHeading = document.createElement("h2");
+  cityHeading.textContent = store.name;
+  article.appendChild(cityHeading);
+
+  const hoursList = document.createElement("ul");
+  article.appendChild(hoursList);
+
+
+  for (let i = 0; i < store.hourlyCookies.length; i++) {
+    const salesListItem = document.createElement("li");
+    salesListItem.classList.add("sales-data");
+    hoursList.appendChild(salesListItem);
+    const cookiesSoldThisHour = store.hourlyCookies[i];
+    store.totalCookies += cookiesSoldThisHour; // cumulative sum of total cookies sold
+    const salesInfo = `${time[i]}: ${cookiesSoldThisHour} cookies`;
+    salesListItem.textContent = salesInfo;
+  }
+  // total line
+  const salesTotalListItem = document.createElement("li");
+  salesTotalListItem.classList.add("sales-total");
+  hoursList.appendChild(salesTotalListItem);
+  const totalInfo = `Total: ${store.totalCookies} cookies`;
+  salesTotalListItem.textContent = totalInfo;
+}
+
+renderSalesData(seattle);
+renderSalesData(tokyo);
+renderSalesData(dubai);
+renderSalesData(paris);
+renderSalesData(lima);
 
 /*
 const seattle = {
@@ -122,45 +175,3 @@ const lima = {
 lima.estimate();
 
 */
-
-const locationContainerElement = document.getElementById("locationSales");
-// create element
-// appendChild to element
-// add text to element
-
-function renderSalesData(store) {
-  // create new elements
-  const article = document.createElement("article");
-  locationContainerElement.appendChild(article);
-
-  const cityHeading = document.createElement("h2");
-  cityHeading.textContent = store.name;
-  article.appendChild(cityHeading);
-
-  const hoursList = document.createElement("ul");
-  article.appendChild(hoursList);
-
-// totalCookies = 0
-
-  for (let i = 0; i < store.hourlyCookies.length; i++) {
-    const salesListItem = document.createElement("li");
-    salesListItem.classList.add("sales-data");
-    hoursList.appendChild(salesListItem);
-    const cookiesSoldThisHour = store.hourlyCookies[i];
-    store.totalCookies += cookiesSoldThisHour; // cumulative sum of total cookies sold
-    const salesInfo = `${time[i]}: ${cookiesSoldThisHour} cookies`;
-    salesListItem.textContent = salesInfo;
-  }
-  // total line
-  const salesTotalListItem = document.createElement("li");
-  salesTotalListItem.classList.add("sales-total");
-  hoursList.appendChild(salesTotalListItem);
-  const totalInfo = `Total: ${store.totalCookies} cookies`;
-  salesTotalListItem.textContent = totalInfo;
-}
-
-renderSalesData(seattle);
-// renderSalesData(tokyo);
-// renderSalesData(dubai);
-// renderSalesData(paris);
-// renderSalesData(lima);
