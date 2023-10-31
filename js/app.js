@@ -162,30 +162,32 @@ function totalSales(arr) {
 }
 
 const locationContainerElement = document.getElementById("locationSales");
-
+// create element
+// appendChild to element
+// add text to element
 function renderSalesData(location) {
   // create new elements
   const article = document.createElement("article");
   locationContainerElement.appendChild(article);
 
-  const h2 = document.createElement("h2");
-  h2.textContent = location.name;
-  article.appendChild(h2);
+  const cityHeading = document.createElement("h2");
+  cityHeading.textContent = location.name;
+  article.appendChild(cityHeading);
 
-  const ul = document.createElement("ul");
-  article.appendChild(ul);
+  const hoursList = document.createElement("ul");
+  article.appendChild(hoursList);
 
   for (let i = 0; i < location.hourlyCookies.length; i++) {
-    const li = document.createElement("li");
-    li.textContent = time[i] + ": " + location.hourlyCookies[i];
-    li.classList.add("sales-data");
-    ul.appendChild(li);
+    const salesListItem = document.createElement("li");
+    salesListItem.textContent = time[i] + ": " + location.hourlyCookies[i];
+    salesListItem.classList.add("sales-data");
+    hoursList.appendChild(salesListItem);
   }
 
-  const li = document.createElement("li");
-  li.textContent = `Total: ${location.totalSales}`;
-  li.classList.add("sales-total");
-  ul.appendChild(li);
+  const salesTotalListItem = document.createElement("li");
+  salesTotalListItem.textContent = `Total: ${location.totalSales}`;
+  salesTotalListItem.classList.add("sales-total");
+  hoursList.appendChild(salesTotalListItem);
 }
 
 renderSalesData(seattle);
