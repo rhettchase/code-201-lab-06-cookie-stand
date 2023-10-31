@@ -34,11 +34,11 @@ CookieStand.prototype.estimate = function() {
 
 const seattle = new CookieStand('Seattle', 23, 65, 6.3, 0);
 const tokyo = new CookieStand('Toyko', 3, 24, 1.2, 0);
-const dubai = new CookieStand('Dubai', 11, 38, 3.7);
-const paris = new CookieStand('Paris', 20, 38, 2.3);
-const lima = new CookieStand('Lima', 2, 16, 4.6);
+const dubai = new CookieStand('Dubai', 11, 38, 3.7, 0);
+const paris = new CookieStand('Paris', 20, 38, 2.3, 0);
+const lima = new CookieStand('Lima', 2, 16, 4.6, 0);
 
-// console.log(seattle);
+console.log(seattle);
 // console.log(tokyo);
 // console.log(dubai);
 // console.log(paris);
@@ -61,8 +61,61 @@ function esimateSales(store) {
   return hourlyCookies;
 }
 
+CookieStand.prototype.render = function() {
+  // get the "container" for location sales data
+  const locationContainerElem = document.getElementById("locationSales");
 
+  // each location is in an article
+  const articleElem = document.createElement('article');
+  locationContainerElem.appendChild(articleElem);
 
+  // add the article heading
+  const headingElem = document.createElement('h2');
+  articleElem.appendChild(headingElem);
+  headingElem.textContent = this.name;
+
+  // add sales in an unordered list
+  const ulElem = document.createElement("ul");
+  articleElem.appendChild(ulElem);
+
+  for (let i = 0; i < this.hourlyCookies.length; i++) {
+    const salesListItem = document.createElement("li");
+    salesListItem.classList.add("sales-data");
+    ulElem.appendChild(salesListItem);
+    const cookiesSoldThisHour = this.hourlyCookies[i];
+    this.totalCookies += cookiesSoldThisHour; // cumulative sum of total cookies sold
+    const salesInfo = `${time[i]}: ${cookiesSoldThisHour} cookies`;
+    salesListItem.textContent = salesInfo;
+  }
+
+  // total line
+  const salesTotalListItem = document.createElement("li");
+  salesTotalListItem.classList.add("sales-total");
+  ulElem.appendChild(salesTotalListItem);
+  const totalInfo = `Total: ${this.totalCookies} cookies`;
+  salesTotalListItem.textContent = totalInfo;
+
+  // add the table
+  const tableElem = document.createElement('table');
+  articleElem.appendChild(tableElem);
+
+  const headerRow = 
+
+};
+
+seattle.render();
+tokyo.render();
+dubai.render();
+paris.render();
+lima.render();
+
+// renderSalesData(seattle);
+// renderSalesData(tokyo);
+// renderSalesData(dubai);
+// renderSalesData(paris);
+// renderSalesData(lima);
+
+/*
 const locationContainerElement = document.getElementById("locationSales");
 // create element
 // appendChild to element
@@ -90,6 +143,7 @@ function renderSalesData(store) {
     const salesInfo = `${time[i]}: ${cookiesSoldThisHour} cookies`;
     salesListItem.textContent = salesInfo;
   }
+
   // total line
   const salesTotalListItem = document.createElement("li");
   salesTotalListItem.classList.add("sales-total");
@@ -98,13 +152,8 @@ function renderSalesData(store) {
   salesTotalListItem.textContent = totalInfo;
 }
 
-renderSalesData(seattle);
-renderSalesData(tokyo);
-renderSalesData(dubai);
-renderSalesData(paris);
-renderSalesData(lima);
 
-/*
+
 const seattle = {
   name: "Seattle",
   minCustomers: 23,
