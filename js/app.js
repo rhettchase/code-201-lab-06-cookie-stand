@@ -27,7 +27,7 @@ const seattle = {
   generateCustomers: function () {
     return random(this.minCustomers, this.maxCustomers);
   },
-  generateCookies: function () {
+  generateCookies: function () { // worked with Larry L. on this function
     for (let i = 6; i <= 19; i++) {
       this.hourlyCookies.push(
         Math.floor(this.avgCookies * this.generateCustomers())
