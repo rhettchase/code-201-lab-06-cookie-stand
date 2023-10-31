@@ -64,10 +64,16 @@ h6 {
   letter-spacing: 0;
 }
 
+p {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  letter-spacing: 0;
+  padding-left: 1.5rem;
+}
+
 /* Lists
 reference: skeleton
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-
 
 ul {
   list-style: circle inside;
@@ -92,13 +98,18 @@ li {
 }
 
 li.navigation {
-    display: inline-block;
-    margin-right: 20px; /* adding spacing between items */
-    font-family: Georgia, Times, serif, sans-serif;
-  }
+  display: inline-block;
+  margin-right: 20px; /* adding spacing between items */
+  font-family: Georgia, Times, serif, sans-serif;
+}
 
-  li.sales-data {
+li.sales-data {
+  font-family: Arial, Helvetica, Verdana;
+}
+
+li.sales-total {
     font-family: Arial, Helvetica, Verdana;
+    font-weight: bold;
   }
 /* Links
 reference: skeleton

@@ -41,7 +41,111 @@ const seattle = {
 seattle.generateCustomers();
 seattle.generateCookies();
 seattle.generateTotalSales();
-console.log(seattle);
+// console.log(seattle);
+
+const tokyo = {
+  name: "Tokyo",
+  minCustomers: 3,
+  maxCustomers: 24,
+  avgCookies: 1.2,
+  hourlyCookies: [],
+  totalSales: 0,
+  generateCustomers: function () {
+    return random(this.minCustomers, this.maxCustomers);
+  },
+  generateCookies: function () {
+    for (let i = 6; i <= 19; i++) {
+      this.hourlyCookies.push(
+        Math.floor(this.avgCookies * this.generateCustomers())
+      );
+    }
+  },
+  generateTotalSales: function () {
+    this.totalSales = totalSales(this.hourlyCookies);
+  },
+};
+tokyo.generateCustomers();
+tokyo.generateCookies();
+tokyo.generateTotalSales();
+// console.log(tokyo);
+
+const dubai = {
+  name: "Dubai",
+  minCustomers: 11,
+  maxCustomers: 38,
+  avgCookies: 3.7,
+  hourlyCookies: [],
+  totalSales: 0,
+  generateCustomers: function () {
+    return random(this.minCustomers, this.maxCustomers);
+  },
+  generateCookies: function () {
+    for (let i = 6; i <= 19; i++) {
+      this.hourlyCookies.push(
+        Math.floor(this.avgCookies * this.generateCustomers())
+      );
+    }
+  },
+  generateTotalSales: function () {
+    this.totalSales = totalSales(this.hourlyCookies);
+  },
+};
+dubai.generateCustomers();
+dubai.generateCookies();
+dubai.generateTotalSales();
+// console.log(dubai);
+
+const paris = {
+  name: "Paris",
+  minCustomers: 20,
+  maxCustomers: 38,
+  avgCookies: 2.3,
+  hourlyCookies: [],
+  totalSales: 0,
+  generateCustomers: function () {
+    return random(this.minCustomers, this.maxCustomers);
+  },
+  generateCookies: function () {
+    for (let i = 6; i <= 19; i++) {
+      this.hourlyCookies.push(
+        Math.floor(this.avgCookies * this.generateCustomers())
+      );
+    }
+  },
+  generateTotalSales: function () {
+    this.totalSales = totalSales(this.hourlyCookies);
+  },
+};
+paris.generateCustomers();
+paris.generateCookies();
+paris.generateTotalSales();
+// console.log(paris);
+
+const lima = {
+  name: "Lima",
+  minCustomers: 2,
+  maxCustomers: 16,
+  avgCookies: 4.6,
+  hourlyCookies: [],
+  totalSales: 0,
+  generateCustomers: function () {
+    return random(this.minCustomers, this.maxCustomers);
+  },
+  generateCookies: function () {
+    for (let i = 6; i <= 19; i++) {
+      this.hourlyCookies.push(
+        Math.floor(this.avgCookies * this.generateCustomers())
+      );
+    }
+  },
+  generateTotalSales: function () {
+    this.totalSales = totalSales(this.hourlyCookies);
+  },
+};
+lima.generateCustomers();
+lima.generateCookies();
+lima.generateTotalSales();
+// console.log(lima);
 
 // Randomly generate number
 function random(min, max) {
@@ -77,6 +181,15 @@ function renderSalesData(location) {
     li.classList.add("sales-data");
     ul.appendChild(li);
   }
+
+  const li = document.createElement("li");
+  li.textContent = `Total: ${location.totalSales}`;
+  li.classList.add("sales-total");
+  ul.appendChild(li);
 }
 
 renderSalesData(seattle);
+renderSalesData(tokyo);
+renderSalesData(dubai);
+renderSalesData(paris);
+renderSalesData(lima);
