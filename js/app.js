@@ -17,7 +17,15 @@ const time = [
   "7 pm",
 ];
 
-function CookieStand(name, minCustomers, maxCustomers, avgCookies, totalCookies) {
+// let objectArray = [];
+
+function CookieStand(
+  name,
+  minCustomers,
+  maxCustomers,
+  avgCookies,
+  totalCookies
+) {
   this.name = name;
   this.minCustomers = minCustomers;
   this.maxCustomers = maxCustomers;
@@ -27,23 +35,22 @@ function CookieStand(name, minCustomers, maxCustomers, avgCookies, totalCookies)
 }
 
 // add methods
-CookieStand.prototype.estimate = function() {
+CookieStand.prototype.estimate = function () {
   this.hourlyCookies = esimateSales(this);
   return this.hourlyCookies;
 };
 
-const seattle = new CookieStand('Seattle', 23, 65, 6.3, 0);
-const tokyo = new CookieStand('Toyko', 3, 24, 1.2, 0);
-const dubai = new CookieStand('Dubai', 11, 38, 3.7, 0);
-const paris = new CookieStand('Paris', 20, 38, 2.3, 0);
-const lima = new CookieStand('Lima', 2, 16, 4.6, 0);
+const seattle = new CookieStand("Seattle", 23, 65, 6.3, 0);
+const tokyo = new CookieStand("Toyko", 3, 24, 1.2, 0);
+const dubai = new CookieStand("Dubai", 11, 38, 3.7, 0);
+const paris = new CookieStand("Paris", 20, 38, 2.3, 0);
+const lima = new CookieStand("Lima", 2, 16, 4.6, 0);
 
 console.log(seattle);
 // console.log(tokyo);
 // console.log(dubai);
 // console.log(paris);
 // console.log(lima);
-
 
 // helper function - Randomly generate number
 function random(min, max) {
@@ -61,16 +68,20 @@ function esimateSales(store) {
   return hourlyCookies;
 }
 
-CookieStand.prototype.render = function() {
+function totalSalesByHour() {
+  this.totalCookies;
+}
+
+CookieStand.prototype.render = function () {
   // get the "container" for location sales data
   const locationContainerElem = document.getElementById("locationSales");
 
   // each location is in an article
-  const articleElem = document.createElement('article');
+  const articleElem = document.createElement("article");
   locationContainerElem.appendChild(articleElem);
 
   // add the article heading
-  const headingElem = document.createElement('h2');
+  const headingElem = document.createElement("h2");
   articleElem.appendChild(headingElem);
   headingElem.textContent = this.name;
 
@@ -96,11 +107,68 @@ CookieStand.prototype.render = function() {
   salesTotalListItem.textContent = totalInfo;
 
   // add the table
-  const tableElem = document.createElement('table');
+  const tableElem = document.createElement("table");
   articleElem.appendChild(tableElem);
 
-  const headerRow = 
+  // add table head
+  const tableHeadElem = document.createElement("thead");
+  tableElem.appendChild(tableHeadElem);
 
+  // add header Row
+  const headerRow = document.createElement("tr");
+  tableHeadElem.appendChild(headerRow);
+
+  const locationHeadingCell = document.createElement("th");
+  headerRow.appendChild(locationHeadingCell);
+  locationHeadingCell.textContent = "Location";
+
+  // create store hours hours table heading
+  for (let i = 0; i < this.hourlyCookies.length; i++) {
+    const storeHoursCell = document.createElement("th");
+    headerRow.appendChild(storeHoursCell);
+    storeHoursCell.textContent = time[i];
+  }
+
+  const storeTotalCell = document.createElement("th");
+  headerRow.appendChild(storeTotalCell);
+  storeTotalCell.textContent = "Daily Total";
+
+  // add tbody element
+  const tableBodyElem = document.createElement("tbody");
+  tableElem.appendChild(tableBodyElem);
+
+  // add data row
+  // for (let i = 0; i < )
+  const dataRow = document.createElement("tr");
+  tableBodyElem.appendChild(dataRow);
+
+  const locationNameCell = document.createElement("td");
+  dataRow.appendChild(locationNameCell);
+  locationNameCell.textContent = this.name;
+
+  // add data cells
+  for (let i = 0; i < this.hourlyCookies.length; i++) {
+    const salesDataCell = document.createElement("td");
+    dataRow.appendChild(salesDataCell);
+    // salesDataCell.textContent = this.name;
+    salesDataCell.textContent = this.hourlyCookies[i];
+  }
+
+  // add table footer
+  const tableFooter = document.createElement("tfoot");
+  tableElem.appendChild(tableFooter);
+
+  // add table row
+  const headerRowTotal = document.createElement("tr");
+  tableFooter.appendChild(headerRowTotal);
+
+  // add total row
+  for (let i = 0; i < this.hourlyCookies.length; i++) {
+    const totalCookiesCell = document.createElement("th");
+    tableFooter.appendChild(totalCookiesCell);
+    // totalCookiesThisHour = 
+    // totalCookiesCell.textContent = 
+  }
 };
 
 seattle.render();
