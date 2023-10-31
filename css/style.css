@@ -105,11 +105,13 @@ li.navigation {
 
 li.sales-data {
   font-family: Arial, Helvetica, Verdana;
+  color: rgb(111, 111, 111);
 }
 
 li.sales-total {
     font-family: Arial, Helvetica, Verdana;
     font-weight: bold;
+    color: rgb(111, 111, 111);
   }
 /* Links
 reference: skeleton
@@ -130,4 +132,5 @@ footer {
   background-color: lightgray;
   padding: 10px;
   margin-top: 10px;
+  text-align: center;
 }

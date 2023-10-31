@@ -179,13 +179,13 @@ function renderSalesData(location) {
 
   for (let i = 0; i < location.hourlyCookies.length; i++) {
     const salesListItem = document.createElement("li");
-    salesListItem.textContent = time[i] + ": " + location.hourlyCookies[i];
+    salesListItem.textContent = time[i] + ": " + location.hourlyCookies[i] + " cookies";
     salesListItem.classList.add("sales-data");
     hoursList.appendChild(salesListItem);
   }
 
   const salesTotalListItem = document.createElement("li");
-  salesTotalListItem.textContent = `Total: ${location.totalSales}`;
+  salesTotalListItem.textContent = `Total: ${location.totalSales} cookies`;
   salesTotalListItem.classList.add("sales-total");
   hoursList.appendChild(salesTotalListItem);
 }
