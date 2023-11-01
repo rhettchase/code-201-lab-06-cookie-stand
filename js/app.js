@@ -115,13 +115,17 @@ function renderFooter () {
   const headerRowTotal = document.createElement("tr");
   tableFooter.appendChild(headerRowTotal);
 
+  const totalHeadingCell = document.createElement("th");
+  headerRowTotal.appendChild(totalHeadingCell);
+  totalHeadingCell.textContent = "Hourly Totals for All Locations";
+
   // add total row
-  for (let i = 0; i < this.hourlyCookies.length; i++) {
-    const totalCookiesCell = document.createElement("th");
-    tableFooter.appendChild(totalCookiesCell);
-    // totalCookiesThisHour =
-    // totalCookiesCell.textContent =
-  }
+  // for (let i = 0; i < this.hourlyCookies.length; i++) {
+  //   const totalHourlyCookiesCell = document.createElement("th");
+  //   tableFooter.appendChild(totalHourlyCookiesCell);
+  //   // totalCookiesThisHour =
+  //   // totalCookiesCell.textContent =
+  // }
 }
 
 
@@ -172,7 +176,7 @@ CookieStand.prototype.renderLocationData = function () {
 
 renderHeader();
 seattle.renderLocationData();
-// renderFooter();
+renderFooter();
 
 /*
 const locationContainerElement = document.getElementById("locationSales");
