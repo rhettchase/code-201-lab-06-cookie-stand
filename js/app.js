@@ -18,8 +18,6 @@ const time = [
 ];
 
 
-
-
 function CookieStand(
   name,
   minCustomers,
@@ -40,11 +38,6 @@ CookieStand.prototype.estimate = function () {
   this.hourlyCookies = esimateSales(this);
   return this.hourlyCookies;
 };
-
-// CookieStand.prototype.total = function () {
-//   this.totalCookies = totalSales(this);
-//   return this.totalCookies;
-// };
 
 const seattle = new CookieStand("Seattle", 23, 65, 6.3, 0);
 const tokyo = new CookieStand("Toyko", 3, 24, 1.2, 0);
@@ -76,9 +69,18 @@ function esimateSales(store) {
   return hourlyCookies;
 }
 
+// global reference to container referenced by DOM
 const locationContainerElem = document.getElementById("locationSales");
+
+// add article element and append to container
+const articleElem = document.createElement("article");
+locationContainerElem.appendChild(articleElem);
+articleElem.classList.add("sales-table");
+
+// initiate the table and append to the article
 const tableElem = document.createElement("table");
-locationContainerElem.appendChild(tableElem);
+articleElem.appendChild(tableElem);
+
 
 // add the table header
 function renderHeader() {
@@ -107,7 +109,7 @@ function renderHeader() {
 }
 
 CookieStand.prototype.renderLocationData = function () {
-  // let totalSalesbyHour = [];
+
   for (let i = 0; i < this.hourlyCookies.length; i++) {
     const cookiesSoldThisHour = this.hourlyCookies[i];
     this.totalCookies += cookiesSoldThisHour; // cumulative sum of total cookies sold

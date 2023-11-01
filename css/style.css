@@ -166,4 +166,8 @@ th {
   background-color: salmon;
 }
 
+article.sales-table {
+  margin: 5rem;
+}
+
 
