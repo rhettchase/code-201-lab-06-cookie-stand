@@ -40,6 +40,11 @@ CookieStand.prototype.estimate = function () {
   return this.hourlyCookies;
 };
 
+CookieStand.prototype.total = function () {
+  this.totalCookies = totalSales(this);
+  return this.totalCookies;
+};
+
 const seattle = new CookieStand("Seattle", 23, 65, 6.3, 0);
 const tokyo = new CookieStand("Toyko", 3, 24, 1.2, 0);
 const dubai = new CookieStand("Dubai", 11, 38, 3.7, 0);
@@ -68,47 +73,13 @@ function esimateSales(store) {
   return hourlyCookies;
 }
 
-function totalSalesByHour() {
-  this.totalCookies;
-}
 
-CookieStand.prototype.render = function () {
-  // get the "container" for location sales data
-  const locationContainerElem = document.getElementById("locationSales");
+const locationContainerElem = document.getElementById("locationSales");
+const tableElem = document.createElement("table");
+locationContainerElem.appendChild(tableElem);
 
-  // each location is in an article
-  const articleElem = document.createElement("article");
-  locationContainerElem.appendChild(articleElem);
-
-  // add the article heading
-  const headingElem = document.createElement("h2");
-  articleElem.appendChild(headingElem);
-  headingElem.textContent = this.name;
-
-  // add sales in an unordered list
-  const ulElem = document.createElement("ul");
-  articleElem.appendChild(ulElem);
-
-  for (let i = 0; i < this.hourlyCookies.length; i++) {
-    const salesListItem = document.createElement("li");
-    salesListItem.classList.add("sales-data");
-    ulElem.appendChild(salesListItem);
-    const cookiesSoldThisHour = this.hourlyCookies[i];
-    this.totalCookies += cookiesSoldThisHour; // cumulative sum of total cookies sold
-    const salesInfo = `${time[i]}: ${cookiesSoldThisHour} cookies`;
-    salesListItem.textContent = salesInfo;
-  }
-
-  // total line
-  const salesTotalListItem = document.createElement("li");
-  salesTotalListItem.classList.add("sales-total");
-  ulElem.appendChild(salesTotalListItem);
-  const totalInfo = `Total: ${this.totalCookies} cookies`;
-  salesTotalListItem.textContent = totalInfo;
-
-  // add the table
-  const tableElem = document.createElement("table");
-  articleElem.appendChild(tableElem);
+// add the table header
+function renderHeader() {
 
   // add table head
   const tableHeadElem = document.createElement("thead");
@@ -123,7 +94,7 @@ CookieStand.prototype.render = function () {
   locationHeadingCell.textContent = "Location";
 
   // create store hours hours table heading
-  for (let i = 0; i < this.hourlyCookies.length; i++) {
+  for (let i = 0; i < time.length; i++) {
     const storeHoursCell = document.createElement("th");
     headerRow.appendChild(storeHoursCell);
     storeHoursCell.textContent = time[i];
@@ -132,13 +103,51 @@ CookieStand.prototype.render = function () {
   const storeTotalCell = document.createElement("th");
   headerRow.appendChild(storeTotalCell);
   storeTotalCell.textContent = "Daily Total";
+}
+
+// add table footer
+function renderFooter () {
+
+  const tableFooter = document.createElement("tfoot");
+  tableElem.appendChild(tableFooter);
+
+  // add table row
+  const headerRowTotal = document.createElement("tr");
+  tableFooter.appendChild(headerRowTotal);
+
+  // add total row
+  for (let i = 0; i < this.hourlyCookies.length; i++) {
+    const totalCookiesCell = document.createElement("th");
+    tableFooter.appendChild(totalCookiesCell);
+    // totalCookiesThisHour =
+    // totalCookiesCell.textContent =
+  }
+}
+
+
+CookieStand.prototype.renderLocationData = function () {
+  for (let i = 0; i < this.hourlyCookies.length; i++) {
+    const salesListItem = document.createElement("li");
+    salesListItem.classList.add("sales-data");
+    // ulElem.appendChild(salesListItem);
+    const cookiesSoldThisHour = this.hourlyCookies[i];
+    this.totalCookies += cookiesSoldThisHour; // cumulative sum of total cookies sold
+    // const salesInfo = `${time[i]}: ${cookiesSoldThisHour} cookies`;
+    // salesListItem.textContent = salesInfo;
+  }
+
+  // total line
+  // const salesTotalListItem = document.createElement("li");
+  // salesTotalListItem.classList.add("sales-total");
+  // ulElem.appendChild(salesTotalListItem);
+  // const totalInfo = `Total: ${this.totalCookies} cookies`;
+  // salesTotalListItem.textContent = totalInfo;
 
   // add tbody element
   const tableBodyElem = document.createElement("tbody");
   tableElem.appendChild(tableBodyElem);
 
   // add data row
-  // for (let i = 0; i < )
   const dataRow = document.createElement("tr");
   tableBodyElem.appendChild(dataRow);
 
@@ -154,34 +163,16 @@ CookieStand.prototype.render = function () {
     salesDataCell.textContent = this.hourlyCookies[i];
   }
 
-  // add table footer
-  const tableFooter = document.createElement("tfoot");
-  tableElem.appendChild(tableFooter);
+  // add daily total for the location row
+  const locationDailyTotal = document.createElement("td");
+  dataRow.appendChild(locationDailyTotal);
+  locationDailyTotal.textContent = this.totalCookies;
 
-  // add table row
-  const headerRowTotal = document.createElement("tr");
-  tableFooter.appendChild(headerRowTotal);
-
-  // add total row
-  for (let i = 0; i < this.hourlyCookies.length; i++) {
-    const totalCookiesCell = document.createElement("th");
-    tableFooter.appendChild(totalCookiesCell);
-    // totalCookiesThisHour = 
-    // totalCookiesCell.textContent = 
-  }
 };
 
-seattle.render();
-tokyo.render();
-dubai.render();
-paris.render();
-lima.render();
-
-// renderSalesData(seattle);
-// renderSalesData(tokyo);
-// renderSalesData(dubai);
-// renderSalesData(paris);
-// renderSalesData(lima);
+renderHeader();
+seattle.renderLocationData();
+// renderFooter();
 
 /*
 const locationContainerElement = document.getElementById("locationSales");
