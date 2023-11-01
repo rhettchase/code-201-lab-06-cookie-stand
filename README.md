@@ -1,4 +1,4 @@
-# LAB - 06
+# LAB - 06 (class-06, class-07)
 
 ## Salmon Cookie Stand
 
@@ -16,11 +16,13 @@ For the sales data, the application will need to be adaptable and able to add an
 
 ### Lighthouse Accessibility Report Score
 
-![Acessibility Score](img/accessibility-10-30.png)
+![Acessibility Score](img/accessibility.png)
 
 ### Reflections and Comments
 
 - I utilized `objects` to store the data for each location
 - These `objects` contained a variety of data types, including `strings`, `arrays`, `numbers` and `functions`
 - I used several `for loops` to iterate through calculations such as generating the number of cookies sold per hour
-- The number of cookies sold per hour were then `pushed` into the array of hourly sales for each location
+- I converted all object literals with a single constructor function that created new instances when called
+- I built a single table of data that contained all sales data for all locations. This required building multiple functions to render different parts of the table: rendering the header, render the location data, and render the footer. All of these were appended to be part of the table.
+- I initiated the table styling by utilizing the `[elementName].classList.add("class-name");` in my javaScript code to be able to style using the `external css stylesheet`
