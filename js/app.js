@@ -103,7 +103,7 @@ function renderHeader() {
 
   const storeTotalCell = document.createElement("th");
   headerRow.appendChild(storeTotalCell);
-  storeTotalCell.textContent = "Daily Total";
+  storeTotalCell.textContent = "Daily Location Total";
 }
 
 CookieStand.prototype.renderLocationData = function () {
