@@ -54,7 +54,7 @@ const lima = new CookieStand("Lima", 2, 16, 4.6, 0);
 
 const cities = [seattle, tokyo, dubai, paris, lima];
 
-console.log(seattle);
+// console.log(seattle);
 // console.log(tokyo);
 // console.log(dubai);
 // console.log(paris);
@@ -124,11 +124,13 @@ CookieStand.prototype.renderLocationData = function () {
   const locationNameCell = document.createElement("td");
   dataRow.appendChild(locationNameCell);
   locationNameCell.textContent = this.name;
+  locationNameCell.classList.add("body-data");
 
   // add data cells
   for (let i = 0; i < this.hourlyCookies.length; i++) {
     const salesDataCell = document.createElement("td");
     dataRow.appendChild(salesDataCell);
+    salesDataCell.classList.add("body-data");
     salesDataCell.textContent = this.hourlyCookies[i];
   }
 
@@ -136,6 +138,7 @@ CookieStand.prototype.renderLocationData = function () {
   const locationDailyTotal = document.createElement("td");
   dataRow.appendChild(locationDailyTotal);
   locationDailyTotal.textContent = this.totalCookies;
+  locationDailyTotal.classList.add("total-data");
 };
 
 
@@ -166,11 +169,13 @@ function renderFooter() {
     hourlyTotalData.textContent = hourTotal;
     totalAllLocations += hourTotal;
     // console.log(hourTotal);
+    hourlyTotalData.classList.add("total-data");
   }
 
   const overallTotalCell = document.createElement("td");
   headerRowTotal.appendChild(overallTotalCell);
   overallTotalCell.textContent = totalAllLocations;
+  overallTotalCell.classList.add("total-data");
   // console.log(totalAllLocations);
 
 }
@@ -183,112 +188,4 @@ paris.renderLocationData();
 lima.renderLocationData();
 renderFooter();
 
-/*
-const locationContainerElement = document.getElementById("locationSales");
-// create element
-// appendChild to element
-// add text to element
 
-function renderSalesData(store) {
-  // create new elements
-  const article = document.createElement("article");
-  locationContainerElement.appendChild(article);
-
-  const cityHeading = document.createElement("h2");
-  cityHeading.textContent = store.name;
-  article.appendChild(cityHeading);
-
-  const hoursList = document.createElement("ul");
-  article.appendChild(hoursList);
-
-
-  for (let i = 0; i < store.hourlyCookies.length; i++) {
-    const salesListItem = document.createElement("li");
-    salesListItem.classList.add("sales-data");
-    hoursList.appendChild(salesListItem);
-    const cookiesSoldThisHour = store.hourlyCookies[i];
-    store.totalCookies += cookiesSoldThisHour; // cumulative sum of total cookies sold
-    const salesInfo = `${time[i]}: ${cookiesSoldThisHour} cookies`;
-    salesListItem.textContent = salesInfo;
-  }
-
-  // total line
-  const salesTotalListItem = document.createElement("li");
-  salesTotalListItem.classList.add("sales-total");
-  hoursList.appendChild(salesTotalListItem);
-  const totalInfo = `Total: ${store.totalCookies} cookies`;
-  salesTotalListItem.textContent = totalInfo;
-}
-
-
-
-const seattle = {
-  name: "Seattle",
-  minCustomers: 23,
-  maxCustomers: 65,
-  avgCookies: 6.3,
-  hourlyCookies: [],
-  totalCookies: 0,
-  estimate: function () {
-    this.hourlyCookies = esimateSales(this);
-  },
-};
-
-seattle.estimate();
-
-const tokyo = {
-  name: "Tokyo",
-  minCustomers: 3,
-  maxCustomers: 24,
-  avgCookies: 1.2,
-  hourlyCookies: [],
-  totalCookies: 0,
-  estimate: function () {
-    this.hourlyCookies = esimateSales(this);
-  },
-};
-
-tokyo.estimate();
-
-const dubai = {
-  name: "Dubai",
-  minCustomers: 11,
-  maxCustomers: 38,
-  avgCookies: 3.7,
-  hourlyCookies: [],
-  totalCookies: 0,
-  estimate: function () {
-    this.hourlyCookies = esimateSales(this);
-  },
-};
-
-dubai.estimate();
-
-const paris = {
-  name: "Paris",
-  minCustomers: 20,
-  maxCustomers: 38,
-  avgCookies: 2.3,
-  hourlyCookies: [],
-  totalCookies: 0,
-  estimate: function () {
-    this.hourlyCookies = esimateSales(this);
-  },
-};
-paris.estimate();
-
-const lima = {
-  name: "Lima",
-  minCustomers: 2,
-  maxCustomers: 16,
-  avgCookies: 4.6,
-  hourlyCookies: [],
-  totalCookies: 0,
-  estimate: function () {
-    this.hourlyCookies = esimateSales(this);
-  },
-};
-
-lima.estimate();
-
-*/

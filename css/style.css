@@ -103,7 +103,7 @@ li.navigation {
   font-family: Georgia, Times, serif, sans-serif;
 }
 
-li.sales-data {
+/* li.sales-data {
   font-family: Arial, Helvetica, Verdana;
   color: rgb(111, 111, 111);
 }
@@ -112,7 +112,7 @@ li.sales-total {
     font-family: Arial, Helvetica, Verdana;
     font-weight: bold;
     color: rgb(111, 111, 111);
-  }
+  } */
 /* Links
 reference: skeleton
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -134,3 +134,36 @@ footer {
   margin-top: 10px;
   text-align: center;
 }
+
+/* Tables
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+th,
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #E1E1E1;
+  font-family: Arial, Helvetica, Verdana; }
+th:first-child,
+td:first-child {
+  padding-left: 0; }
+th:last-child,
+td:last-child {
+  padding-right: 0; }
+
+th {
+  background-color: darkgray;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+
+.total-data {
+  background-color: darkgray;
+  color: white;
+  font-weight: bold;
+}
+
+.body-data {
+  background-color: salmon;
+}
+
+
