@@ -1,20 +1,20 @@
-"use strict";
+'use strict';
 
 const time = [
-  "6 am",
-  "7 am",
-  "8 am",
-  "9 am",
-  "10 am",
-  "11 am",
-  "12 pm",
-  "1 pm",
-  "2 pm",
-  "3 pm",
-  "4 pm",
-  "5 pm",
-  "6 pm",
-  "7 pm",
+  '6 am',
+  '7 am',
+  '8 am',
+  '9 am',
+  '10 am',
+  '11 am',
+  '12 pm',
+  '1 pm',
+  '2 pm',
+  '3 pm',
+  '4 pm',
+  '5 pm',
+  '6 pm',
+  '7 pm',
 ];
 
 function CookieStand(
@@ -45,54 +45,54 @@ CookieStand.prototype.estimate = function () {
 };
 
 const seattle = new CookieStand(
-  "Seattle",
+  'Seattle',
   23,
   65,
   6.3,
   0,
-  "6 am - 8 pm",
-  "123-456-789",
-  "2901 3rd Ave #300, Seattle, WA 98121"
+  '6 am - 8 pm',
+  '123-456-789',
+  '2901 3rd Ave #300, Seattle, WA 98121'
 );
 const tokyo = new CookieStand(
-  "Toyko",
+  'Toyko',
   3,
   24,
   1.2,
   0,
-  "6 am - 8 pm",
-  "123-456-789",
-  "1 Chrome, Sudima City, Tokyo 131-8634"
+  '6 am - 8 pm',
+  '123-456-789',
+  '1 Chrome, Sudima City, Tokyo 131-8634'
 );
 const dubai = new CookieStand(
-  "Dubai",
+  'Dubai',
   11,
   38,
   3.7,
   0,
-  "6 am - 8 pm",
-  "123-456-789",
-  "1 Sheikh Muhammed bin Rashid Blvd, Dubai"
+  '6 am - 8 pm',
+  '123-456-789',
+  '1 Sheikh Muhammed bin Rashid Blvd, Dubai'
 );
 const paris = new CookieStand(
-  "Paris",
+  'Paris',
   20,
   38,
   2.3,
   0,
-  "6 am - 8 pm",
-  "123-456-789",
-  "Champ de Mars, 5 Avenue Anatole, Paris, 75007"
+  '6 am - 8 pm',
+  '123-456-789',
+  'Champ de Mars, 5 Avenue Anatole, Paris, 75007'
 );
 const lima = new CookieStand(
-  "Lima",
+  'Lima',
   2,
   16,
   4.6,
   0,
-  "6 am - 8 pm",
-  "123-456-789",
-  "123 Avenida Dominguez, Miraflores 15074"
+  '6 am - 8 pm',
+  '123-456-789',
+  '123 Avenida Dominguez, Miraflores 15074'
 );
 
 const cities = [seattle, tokyo, dubai, paris, lima];
@@ -120,15 +120,15 @@ function esimateSales(store) {
 }
 
 // global reference to container referenced by DOM
-const locationContainerElem = document.getElementById("locationSales");
+const locationContainerElem = document.getElementById('locationSales');
 
-const articleElem = document.createElement("article");
-const tableElem = document.createElement("table");
+const articleElem = document.createElement('article');
+const tableElem = document.createElement('table');
 
-// add article element and append to container
+// add article element and append to container IF the location container "location sales" exists in the HTML
 if (locationContainerElem) {
   locationContainerElem.appendChild(articleElem);
-  articleElem.classList.add("sales-table");
+  articleElem.classList.add('sales-table');
   // initiate the table and append to the article
   articleElem.appendChild(tableElem);
 }
@@ -136,27 +136,27 @@ if (locationContainerElem) {
 // add the table header
 function renderHeader() {
   // add table head
-  const tableHeadElem = document.createElement("thead");
+  const tableHeadElem = document.createElement('thead');
   tableElem.appendChild(tableHeadElem);
 
   // add header Row
-  const headerRow = document.createElement("tr");
+  const headerRow = document.createElement('tr');
   tableHeadElem.appendChild(headerRow);
 
-  const locationHeadingCell = document.createElement("th");
+  const locationHeadingCell = document.createElement('th');
   headerRow.appendChild(locationHeadingCell);
-  locationHeadingCell.textContent = "Location";
+  locationHeadingCell.textContent = 'Location';
 
   // create store hours hours table heading
   for (let i = 0; i < time.length; i++) {
-    const storeHoursCell = document.createElement("th");
+    const storeHoursCell = document.createElement('th');
     headerRow.appendChild(storeHoursCell);
     storeHoursCell.textContent = time[i];
   }
 
-  const storeTotalCell = document.createElement("th");
+  const storeTotalCell = document.createElement('th');
   headerRow.appendChild(storeTotalCell);
-  storeTotalCell.textContent = "Daily Location Total";
+  storeTotalCell.textContent = 'Daily Location Total';
 }
 
 CookieStand.prototype.renderLocationData = function () {
@@ -166,52 +166,52 @@ CookieStand.prototype.renderLocationData = function () {
   }
 
   // add tbody element
-  const tableBodyElem = document.createElement("tbody");
+  const tableBodyElem = document.createElement('tbody');
   tableElem.appendChild(tableBodyElem);
 
   // add data row
-  const dataRow = document.createElement("tr");
+  const dataRow = document.createElement('tr');
   tableBodyElem.appendChild(dataRow);
 
-  const locationNameCell = document.createElement("td");
+  const locationNameCell = document.createElement('td');
   dataRow.appendChild(locationNameCell);
   locationNameCell.textContent = this.name;
-  locationNameCell.classList.add("body-data");
+  locationNameCell.classList.add('body-data');
 
   // add data cells
   for (let i = 0; i < this.hourlyCookies.length; i++) {
-    const salesDataCell = document.createElement("td");
+    const salesDataCell = document.createElement('td');
     dataRow.appendChild(salesDataCell);
-    salesDataCell.classList.add("body-data");
+    salesDataCell.classList.add('body-data');
     salesDataCell.textContent = this.hourlyCookies[i];
   }
 
   // add daily total for the location row
-  const locationDailyTotal = document.createElement("td");
+  const locationDailyTotal = document.createElement('td');
   dataRow.appendChild(locationDailyTotal);
   locationDailyTotal.textContent = this.totalCookies;
-  locationDailyTotal.classList.add("total-data");
+  locationDailyTotal.classList.add('total-data');
 };
 
 // add table footer
 function renderFooter() {
-  const tableFooter = document.createElement("tfoot");
+  const tableFooter = document.createElement('tfoot');
   tableElem.appendChild(tableFooter);
 
   // add table row
-  const headerRowTotal = document.createElement("tr");
+  const headerRowTotal = document.createElement('tr');
   tableFooter.appendChild(headerRowTotal);
 
-  const totalHeadingCell = document.createElement("th");
+  const totalHeadingCell = document.createElement('th');
   headerRowTotal.appendChild(totalHeadingCell);
-  totalHeadingCell.textContent = "Hourly Totals for All Locations";
+  totalHeadingCell.textContent = 'Hourly Totals for All Locations';
 
   let totalAllLocations = 0;
 
   // calculate Daily hourly total and overall total for all locations using nested for loop
   for (let i = 0; i < time.length; i++) {
     let hourTotal = 0;
-    const hourlyTotalData = document.createElement("td");
+    const hourlyTotalData = document.createElement('td');
     headerRowTotal.appendChild(hourlyTotalData);
     for (let j = 0; j < cities.length; j++) {
       hourTotal += cities[j].hourlyCookies[i];
@@ -220,13 +220,13 @@ function renderFooter() {
     hourlyTotalData.textContent = hourTotal;
     totalAllLocations += hourTotal;
     // console.log(hourTotal);
-    hourlyTotalData.classList.add("total-data");
+    hourlyTotalData.classList.add('total-data');
   }
 
-  const overallTotalCell = document.createElement("td");
+  const overallTotalCell = document.createElement('td');
   headerRowTotal.appendChild(overallTotalCell);
   overallTotalCell.textContent = totalAllLocations;
-  overallTotalCell.classList.add("total-data");
+  overallTotalCell.classList.add('total-data');
   // console.log(totalAllLocations);
 }
 
@@ -241,32 +241,32 @@ if (locationContainerElem) {
 }
 
 // global reference to container referenced by DOM
-const infoContainerElem = document.getElementById("locationInfo");
-const articleInfoElem = document.createElement("article");
+const infoContainerElem = document.getElementById('locationInfo');
+const articleInfoElem = document.createElement('article');
 
 // LOCATION INFO
 
 CookieStand.prototype.renderInfo = function () {
   infoContainerElem.appendChild(articleInfoElem);
 
-  const locationHeader = document.createElement("h2");
+  const locationHeader = document.createElement('h2');
   articleInfoElem.appendChild(locationHeader);
-  locationHeader.classList.add("info");
+  locationHeader.classList.add('info');
   locationHeader.textContent = this.name;
 
-  const locationHours = document.createElement("p");
+  const locationHours = document.createElement('p');
   locationHeader.appendChild(locationHours);
-  locationHours.classList.add("info");
+  locationHours.classList.add('info');
   locationHours.textContent = this.hours;
 
-  const locationContact = document.createElement("p");
+  const locationContact = document.createElement('p');
   locationHeader.appendChild(locationContact);
-  locationContact.classList.add("info");
+  locationContact.classList.add('info');
   locationContact.textContent = this.contact;
 
-  const locationAddress = document.createElement("p");
+  const locationAddress = document.createElement('p');
   locationHeader.appendChild(locationAddress);
-  locationAddress.classList.add("info");
+  locationAddress.classList.add('info');
   locationAddress.textContent = this.address;
 };
 
