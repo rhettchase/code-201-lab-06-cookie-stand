@@ -17,19 +17,24 @@ const time = [
   "7 pm",
 ];
 
-
 function CookieStand(
   name,
   minCustomers,
   maxCustomers,
   avgCookies,
-  totalCookies
+  totalCookies,
+  hours,
+  contact,
+  address
 ) {
   this.name = name;
   this.minCustomers = minCustomers;
   this.maxCustomers = maxCustomers;
   this.avgCookies = avgCookies;
   this.totalCookies = totalCookies;
+  this.hours = hours;
+  this.contact = contact;
+  this.address = address;
   this.hourlyCookies = this.estimate();
 }
 
@@ -39,11 +44,56 @@ CookieStand.prototype.estimate = function () {
   return this.hourlyCookies;
 };
 
-const seattle = new CookieStand("Seattle", 23, 65, 6.3, 0);
-const tokyo = new CookieStand("Toyko", 3, 24, 1.2, 0);
-const dubai = new CookieStand("Dubai", 11, 38, 3.7, 0);
-const paris = new CookieStand("Paris", 20, 38, 2.3, 0);
-const lima = new CookieStand("Lima", 2, 16, 4.6, 0);
+const seattle = new CookieStand(
+  "Seattle",
+  23,
+  65,
+  6.3,
+  0,
+  "6 am - 8 pm",
+  "123-456-789",
+  "2901 3rd Ave #300, Seattle, WA 98121"
+);
+const tokyo = new CookieStand(
+  "Toyko",
+  3,
+  24,
+  1.2,
+  0,
+  "6 am - 8 pm",
+  "123-456-789",
+  "1 Chrome, Sudima City, Tokyo 131-8634"
+);
+const dubai = new CookieStand(
+  "Dubai",
+  11,
+  38,
+  3.7,
+  0,
+  "6 am - 8 pm",
+  "123-456-789",
+  "1 Sheikh Muhammed bin Rashid Blvd, Dubai"
+);
+const paris = new CookieStand(
+  "Paris",
+  20,
+  38,
+  2.3,
+  0,
+  "6 am - 8 pm",
+  "123-456-789",
+  "Champ de Mars, 5 Avenue Anatole, Paris, 75007"
+);
+const lima = new CookieStand(
+  "Lima",
+  2,
+  16,
+  4.6,
+  0,
+  "6 am - 8 pm",
+  "123-456-789",
+  "123 Avenida Dominguez, Miraflores 15074"
+);
 
 const cities = [seattle, tokyo, dubai, paris, lima];
 
@@ -72,15 +122,16 @@ function esimateSales(store) {
 // global reference to container referenced by DOM
 const locationContainerElem = document.getElementById("locationSales");
 
-// add article element and append to container
 const articleElem = document.createElement("article");
-locationContainerElem.appendChild(articleElem);
-articleElem.classList.add("sales-table");
-
-// initiate the table and append to the article
 const tableElem = document.createElement("table");
-articleElem.appendChild(tableElem);
 
+// add article element and append to container
+if (locationContainerElem) {
+  locationContainerElem.appendChild(articleElem);
+  articleElem.classList.add("sales-table");
+  // initiate the table and append to the article
+  articleElem.appendChild(tableElem);
+}
 
 // add the table header
 function renderHeader() {
@@ -109,7 +160,6 @@ function renderHeader() {
 }
 
 CookieStand.prototype.renderLocationData = function () {
-
   for (let i = 0; i < this.hourlyCookies.length; i++) {
     const cookiesSoldThisHour = this.hourlyCookies[i];
     this.totalCookies += cookiesSoldThisHour; // cumulative sum of total cookies sold
@@ -143,7 +193,6 @@ CookieStand.prototype.renderLocationData = function () {
   locationDailyTotal.classList.add("total-data");
 };
 
-
 // add table footer
 function renderFooter() {
   const tableFooter = document.createElement("tfoot");
@@ -159,7 +208,7 @@ function renderFooter() {
 
   let totalAllLocations = 0;
 
-  // calculate Daily hourly total and overall total for all locations
+  // calculate Daily hourly total and overall total for all locations using nested for loop
   for (let i = 0; i < time.length; i++) {
     let hourTotal = 0;
     const hourlyTotalData = document.createElement("td");
@@ -179,15 +228,52 @@ function renderFooter() {
   overallTotalCell.textContent = totalAllLocations;
   overallTotalCell.classList.add("total-data");
   // console.log(totalAllLocations);
-
 }
 
-renderHeader();
-seattle.renderLocationData();
-tokyo.renderLocationData();
-dubai.renderLocationData();
-paris.renderLocationData();
-lima.renderLocationData();
-renderFooter();
+if (locationContainerElem) {
+  renderHeader();
+  seattle.renderLocationData();
+  tokyo.renderLocationData();
+  dubai.renderLocationData();
+  paris.renderLocationData();
+  lima.renderLocationData();
+  renderFooter();
+}
 
+// global reference to container referenced by DOM
+const infoContainerElem = document.getElementById("locationInfo");
+const articleInfoElem = document.createElement("article");
 
+// LOCATION INFO
+
+CookieStand.prototype.renderInfo = function () {
+  infoContainerElem.appendChild(articleInfoElem);
+
+  const locationHeader = document.createElement("h2");
+  articleInfoElem.appendChild(locationHeader);
+  locationHeader.classList.add("info");
+  locationHeader.textContent = this.name;
+
+  const locationHours = document.createElement("p");
+  locationHeader.appendChild(locationHours);
+  locationHours.classList.add("info");
+  locationHours.textContent = this.hours;
+
+  const locationContact = document.createElement("p");
+  locationHeader.appendChild(locationContact);
+  locationContact.classList.add("info");
+  locationContact.textContent = this.contact;
+
+  const locationAddress = document.createElement("p");
+  locationHeader.appendChild(locationAddress);
+  locationAddress.classList.add("info");
+  locationAddress.textContent = this.address;
+};
+
+if (infoContainerElem) {
+  seattle.renderInfo();
+  tokyo.renderInfo();
+  dubai.renderInfo();
+  paris.renderInfo();
+  lima.renderInfo();
+}

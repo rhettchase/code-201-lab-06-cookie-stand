@@ -1,4 +1,4 @@
-# LAB - 06 (class-06, class-07)
+# LAB - 06 (class-06, class-07, class-08)
 
 ## Salmon Cookie Stand
 
@@ -27,3 +27,5 @@ For the sales data, the application will need to be adaptable and able to add an
 - I built a single table of data that contained all sales data for all locations. This required building multiple functions to render different parts of the table: rendering the header, render the location data, and render the footer. All of these were appended to be part of the table.
 - I initiated the table styling by utilizing the `[elementName].classList.add("class-name");` in my javaScript code to be able to style using the `external css stylesheet`
 - I used a `nested for loop` to iterate through each of the locations by the hour and total the total sales for each hour and calculate a cumulative total of sales
+- I converted the detailed information for each location (name, address, hours, contact) from hard code in the HTML to be *dynamically rendered* from the location objects
+  - This required adding `if statements` to only render the information, `appendChild`, and call the rendering functions if the `document container element` was referenced on each page
