@@ -35,8 +35,9 @@
           <label>Maximum Customers Per Hour:</label>
           <input name="maxCustomers" type="number" min="0" max="1000" />
           <label>Average Cookies Per Sale:</label>
-          <input name="minCustomers" type="number" min="1" max="1000" />
+          <input name="avgCookies" type="text" id="floatInput" pattern="[0-9]+(\.[0-9]+)?"/>
         </fieldset>
+        <button type="submit">Submit</button>
       </form>
       <div id="locationSales"></div>
     </main>

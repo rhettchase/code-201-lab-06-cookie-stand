@@ -38,6 +38,42 @@ function CookieStand(
   this.hourlyCookies = this.estimate();
 }
 
+////////// NEW LOCATION FORM
+
+const addLocationForm = document.getElementById('addLocationForm');
+
+// event listeners need to know: what event do they care about, and what do they want to do when it happens
+
+addLocationForm.addEventListener('submit', function handleSubmit(event) {
+  event.preventDefault();
+  const name = event.target.name.value; // gets location name from form
+  let minCustomers = event.target.minCustomers.value;
+  minCustomers = parseInt(minCustomers);
+  let maxCustomers = event.target.maxCustomers.value;
+  maxCustomers = parseInt(maxCustomers);
+  let avgCookies = event.target.avgCookies.value;
+  avgCookies = parseFloat(avgCookies);
+
+  if (minCustomers > maxCustomers) {
+    event.preventDefault(); // prevent form submission
+    alert(
+      'Max customers must be greater than or equal to min customers. Please resubmit.'
+    );
+  } else {
+    const newLocation = new CookieStand(
+      name,
+      minCustomers,
+      maxCustomers,
+      avgCookies
+    );
+    newLocation.estimate();
+    addLocationForm.reset();
+    cities.push(newLocation);
+  }
+
+  console.log(cities);
+});
+
 // add methods
 CookieStand.prototype.estimate = function () {
   this.hourlyCookies = esimateSales(this);
