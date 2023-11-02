@@ -22,7 +22,6 @@ function CookieStand(
   minCustomers,
   maxCustomers,
   avgCookies,
-  totalCookies,
   hours,
   contact,
   address
@@ -31,7 +30,7 @@ function CookieStand(
   this.minCustomers = minCustomers;
   this.maxCustomers = maxCustomers;
   this.avgCookies = avgCookies;
-  this.totalCookies = totalCookies;
+  this.totalCookies = 0;
   this.hours = hours;
   this.contact = contact;
   this.address = address;
@@ -66,12 +65,15 @@ addLocationForm.addEventListener('submit', function handleSubmit(event) {
       maxCustomers,
       avgCookies
     );
+    console.log(newLocation);
     newLocation.estimate();
+    newLocation.renderLocationData();
+    renderFooter();
+    cities.push(newLocation); // push new location object into cities array
     addLocationForm.reset();
-    cities.push(newLocation);
   }
 
-  console.log(cities);
+  // console.log(cities);
 });
 
 // add methods
@@ -85,7 +87,6 @@ const seattle = new CookieStand(
   23,
   65,
   6.3,
-  0,
   '6 am - 8 pm',
   '123-456-789',
   '2901 3rd Ave #300, Seattle, WA 98121'
@@ -95,7 +96,6 @@ const tokyo = new CookieStand(
   3,
   24,
   1.2,
-  0,
   '6 am - 8 pm',
   '123-456-789',
   '1 Chrome, Sudima City, Tokyo 131-8634'
@@ -105,7 +105,6 @@ const dubai = new CookieStand(
   11,
   38,
   3.7,
-  0,
   '6 am - 8 pm',
   '123-456-789',
   '1 Sheikh Muhammed bin Rashid Blvd, Dubai'
@@ -115,7 +114,6 @@ const paris = new CookieStand(
   20,
   38,
   2.3,
-  0,
   '6 am - 8 pm',
   '123-456-789',
   'Champ de Mars, 5 Avenue Anatole, Paris, 75007'
@@ -125,7 +123,6 @@ const lima = new CookieStand(
   2,
   16,
   4.6,
-  0,
   '6 am - 8 pm',
   '123-456-789',
   '123 Avenida Dominguez, Miraflores 15074'
@@ -198,7 +195,9 @@ function renderHeader() {
 CookieStand.prototype.renderLocationData = function () {
   for (let i = 0; i < this.hourlyCookies.length; i++) {
     const cookiesSoldThisHour = this.hourlyCookies[i];
+    console.log(cookiesSoldThisHour);
     this.totalCookies += cookiesSoldThisHour; // cumulative sum of total cookies sold
+    console.log(this.totalCookies);
   }
 
   // add tbody element
@@ -231,6 +230,17 @@ CookieStand.prototype.renderLocationData = function () {
 
 // add table footer
 function renderFooter() {
+  // Since the footer row now needs to be able to render repeatedly
+  // then we need to empty it out if it has already rendered
+  // let tableFooter = document.querySelector('tfoot');
+
+  // if (tableFooter) {
+  //   tableFooter.innerHTML = ''; // removes all children of existing tfoot
+  // } else {
+  //   const tableFooter = document.createElement('tfoot');
+  //   tableElem.appendChild(tableFooter);
+  // }
+
   const tableFooter = document.createElement('tfoot');
   tableElem.appendChild(tableFooter);
 
