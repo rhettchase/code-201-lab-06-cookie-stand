@@ -18,13 +18,47 @@
       <h1>Sales Data by Location</h1>
       <nav>
         <ul>
-            <li class="navigation"><a href="index.html">Home</a></li>
-            <li class="navigation"><a href="sales.html">Sales</a></li>
+          <li class="navigation"><a href="index.html">Home</a></li>
+          <li class="navigation"><a href="sales.html">Sales</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
+      <form id="addLocationForm">
+        <div id="form">
+        <fieldset>
+          <legend>Add a new store to the table!</legend>
+          <label
+            >Location Name:
+            <input name="name" type="text" required maxlength="10" size="8" />
+          </label>
+
+          <label
+            >Minimum Customers Per Hour:
+            <input name="minCustomers" type="number" min="0" max="1000" />
+          </label>
+          <label
+            >Maximum Customers Per Hour:
+            <input name="maxCustomers" type="number" min="0" max="1000" />
+          </label>
+          <label
+            >Average Cookies Per Sale:
+            <input
+              name="avgCookies"
+              type="text"
+              id="floatInput"
+              pattern="[0-9]+(\.[0-9]+)?"
+              required
+              maxlength="4"
+              size="3"
+            />
+          </label>
+          <button type="submit">Click here to add!</button>
+        </fieldset>
+       
+      </form>
+    </div>
       <div id="locationSales"></div>
     </main>
   </body>

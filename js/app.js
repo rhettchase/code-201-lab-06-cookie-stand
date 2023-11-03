@@ -22,7 +22,6 @@ function CookieStand(
   minCustomers,
   maxCustomers,
   avgCookies,
-  totalCookies,
   hours,
   contact,
   address
@@ -31,12 +30,56 @@ function CookieStand(
   this.minCustomers = minCustomers;
   this.maxCustomers = maxCustomers;
   this.avgCookies = avgCookies;
-  this.totalCookies = totalCookies;
+  this.totalCookies = 0;
   this.hours = hours;
   this.contact = contact;
   this.address = address;
   this.hourlyCookies = this.estimate();
 }
+
+////////// NEW LOCATION FORM
+
+const addLocationForm = document.getElementById('addLocationForm');
+
+// event listeners need to know: what event do they care about, and what do they want to do when it happens
+
+addLocationForm.addEventListener('submit', function handleSubmit(event) {
+  event.preventDefault();
+  const name = event.target.name.value; // gets location name from form
+  let minCustomers = event.target.minCustomers.value;
+  minCustomers = parseInt(minCustomers);
+  let maxCustomers = event.target.maxCustomers.value;
+  maxCustomers = parseInt(maxCustomers);
+  let avgCookies = event.target.avgCookies.value;
+  avgCookies = parseFloat(avgCookies);
+
+  // check if location exists
+  const doesCityExist = cities.some((CookieStand) => CookieStand.name.toLowerCase() === name.toLowerCase());
+
+  console.log(doesCityExist);
+  if (doesCityExist) {
+    event.preventDefault(); // prevent form submission
+    alert('This location already exists. Please resubmit.');
+  } else if (minCustomers > maxCustomers) {
+    event.preventDefault(); // prevent form submission
+    alert(
+      'Max customers must be greater than or equal to min customers. Please resubmit.'
+    );
+  } else {
+    const newLocation = new CookieStand(
+      name,
+      minCustomers,
+      maxCustomers,
+      avgCookies
+    );
+    console.log(newLocation);
+    newLocation.estimate();
+    newLocation.renderLocationData();
+    cities.push(newLocation); // push new location object into cities array
+    renderFooter();
+    addLocationForm.reset();
+  }
+});
 
 // add methods
 CookieStand.prototype.estimate = function () {
@@ -49,17 +92,15 @@ const seattle = new CookieStand(
   23,
   65,
   6.3,
-  0,
   '6 am - 8 pm',
   '123-456-789',
   '2901 3rd Ave #300, Seattle, WA 98121'
 );
 const tokyo = new CookieStand(
-  'Toyko',
+  'Tokyo',
   3,
   24,
   1.2,
-  0,
   '6 am - 8 pm',
   '123-456-789',
   '1 Chrome, Sudima City, Tokyo 131-8634'
@@ -69,7 +110,6 @@ const dubai = new CookieStand(
   11,
   38,
   3.7,
-  0,
   '6 am - 8 pm',
   '123-456-789',
   '1 Sheikh Muhammed bin Rashid Blvd, Dubai'
@@ -79,7 +119,6 @@ const paris = new CookieStand(
   20,
   38,
   2.3,
-  0,
   '6 am - 8 pm',
   '123-456-789',
   'Champ de Mars, 5 Avenue Anatole, Paris, 75007'
@@ -89,7 +128,6 @@ const lima = new CookieStand(
   2,
   16,
   4.6,
-  0,
   '6 am - 8 pm',
   '123-456-789',
   '123 Avenida Dominguez, Miraflores 15074'
@@ -133,7 +171,7 @@ if (locationContainerElem) {
   articleElem.appendChild(tableElem);
 }
 
-// add the table header
+// add the sales table header
 function renderHeader() {
   // add table head
   const tableHeadElem = document.createElement('thead');
@@ -195,8 +233,17 @@ CookieStand.prototype.renderLocationData = function () {
 
 // add table footer
 function renderFooter() {
-  const tableFooter = document.createElement('tfoot');
-  tableElem.appendChild(tableFooter);
+  // Since the footer row now needs to be able to render repeatedly
+  // then we need to empty it out if it has already rendered
+
+  let tableFooter = document.querySelector('tfoot');
+
+  if (tableFooter) {
+    tableFooter.innerHTML = ''; // removes all children of existing tfoot
+  } else {
+    tableFooter = document.createElement('tfoot');
+    tableElem.appendChild(tableFooter);
+  }
 
   // add table row
   const headerRowTotal = document.createElement('tr');
@@ -227,7 +274,6 @@ function renderFooter() {
   headerRowTotal.appendChild(overallTotalCell);
   overallTotalCell.textContent = totalAllLocations;
   overallTotalCell.classList.add('total-data');
-  // console.log(totalAllLocations);
 }
 
 if (locationContainerElem) {
@@ -239,6 +285,8 @@ if (locationContainerElem) {
   lima.renderLocationData();
   renderFooter();
 }
+
+// INDEX.HTML
 
 // global reference to container referenced by DOM
 const infoContainerElem = document.getElementById('locationInfo');
