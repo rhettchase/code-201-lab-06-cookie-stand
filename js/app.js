@@ -139,12 +139,6 @@ const lima = new CookieStand(
 
 const cities = [seattle, tokyo, dubai, paris, lima];
 
-// console.log(seattle);
-// console.log(tokyo);
-// console.log(dubai);
-// console.log(paris);
-// console.log(lima);
-
 // helper function - Randomly generate number
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
