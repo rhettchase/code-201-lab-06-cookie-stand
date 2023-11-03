@@ -53,7 +53,14 @@ addLocationForm.addEventListener('submit', function handleSubmit(event) {
   let avgCookies = event.target.avgCookies.value;
   avgCookies = parseFloat(avgCookies);
 
-  if (minCustomers > maxCustomers) {
+  // check if location exists
+  const doesCityExist = cities.some((CookieStand) => CookieStand.name.toLowerCase() === name.toLowerCase());
+
+  console.log(doesCityExist);
+  if (doesCityExist) {
+    event.preventDefault(); // prevent form submission
+    alert('This location already exists. Please resubmit.');
+  } else if (minCustomers > maxCustomers) {
     event.preventDefault(); // prevent form submission
     alert(
       'Max customers must be greater than or equal to min customers. Please resubmit.'
@@ -68,12 +75,10 @@ addLocationForm.addEventListener('submit', function handleSubmit(event) {
     console.log(newLocation);
     newLocation.estimate();
     newLocation.renderLocationData();
-    renderFooter();
     cities.push(newLocation); // push new location object into cities array
+    renderFooter();
     addLocationForm.reset();
   }
-
-  // console.log(cities);
 });
 
 // add methods
@@ -92,7 +97,7 @@ const seattle = new CookieStand(
   '2901 3rd Ave #300, Seattle, WA 98121'
 );
 const tokyo = new CookieStand(
-  'Toyko',
+  'Tokyo',
   3,
   24,
   1.2,
@@ -166,7 +171,7 @@ if (locationContainerElem) {
   articleElem.appendChild(tableElem);
 }
 
-// add the table header
+// add the sales table header
 function renderHeader() {
   // add table head
   const tableHeadElem = document.createElement('thead');
@@ -195,9 +200,7 @@ function renderHeader() {
 CookieStand.prototype.renderLocationData = function () {
   for (let i = 0; i < this.hourlyCookies.length; i++) {
     const cookiesSoldThisHour = this.hourlyCookies[i];
-    console.log(cookiesSoldThisHour);
     this.totalCookies += cookiesSoldThisHour; // cumulative sum of total cookies sold
-    console.log(this.totalCookies);
   }
 
   // add tbody element
@@ -232,17 +235,15 @@ CookieStand.prototype.renderLocationData = function () {
 function renderFooter() {
   // Since the footer row now needs to be able to render repeatedly
   // then we need to empty it out if it has already rendered
-  // let tableFooter = document.querySelector('tfoot');
 
-  // if (tableFooter) {
-  //   tableFooter.innerHTML = ''; // removes all children of existing tfoot
-  // } else {
-  //   const tableFooter = document.createElement('tfoot');
-  //   tableElem.appendChild(tableFooter);
-  // }
+  let tableFooter = document.querySelector('tfoot');
 
-  const tableFooter = document.createElement('tfoot');
-  tableElem.appendChild(tableFooter);
+  if (tableFooter) {
+    tableFooter.innerHTML = ''; // removes all children of existing tfoot
+  } else {
+    tableFooter = document.createElement('tfoot');
+    tableElem.appendChild(tableFooter);
+  }
 
   // add table row
   const headerRowTotal = document.createElement('tr');
@@ -273,7 +274,6 @@ function renderFooter() {
   headerRowTotal.appendChild(overallTotalCell);
   overallTotalCell.textContent = totalAllLocations;
   overallTotalCell.classList.add('total-data');
-  // console.log(totalAllLocations);
 }
 
 if (locationContainerElem) {
@@ -285,6 +285,8 @@ if (locationContainerElem) {
   lima.renderLocationData();
   renderFooter();
 }
+
+// INDEX.HTML
 
 // global reference to container referenced by DOM
 const infoContainerElem = document.getElementById('locationInfo');

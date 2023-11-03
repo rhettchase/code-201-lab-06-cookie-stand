@@ -26,19 +26,39 @@
 
     <main>
       <form id="addLocationForm">
+        <div id="form">
         <fieldset>
           <legend>Add a new store to the table!</legend>
-          <label>Location Name:</label>
-          <input name="name" type="text" />
-          <label>Minimum Customers Per Hour:</label>
-          <input name="minCustomers" type="number" min="0" max="1000" />
-          <label>Maximum Customers Per Hour:</label>
-          <input name="maxCustomers" type="number" min="0" max="1000" />
-          <label>Average Cookies Per Sale:</label>
-          <input name="avgCookies" type="text" id="floatInput" pattern="[0-9]+(\.[0-9]+)?"/>
+          <label
+            >Location Name:
+            <input name="name" type="text" required maxlength="10" size="8" />
+          </label>
+
+          <label
+            >Minimum Customers Per Hour:
+            <input name="minCustomers" type="number" min="0" max="1000" />
+          </label>
+          <label
+            >Maximum Customers Per Hour:
+            <input name="maxCustomers" type="number" min="0" max="1000" />
+          </label>
+          <label
+            >Average Cookies Per Sale:
+            <input
+              name="avgCookies"
+              type="text"
+              id="floatInput"
+              pattern="[0-9]+(\.[0-9]+)?"
+              required
+              maxlength="4"
+              size="3"
+            />
+          </label>
+          <button type="submit">Click here to add!</button>
         </fieldset>
-        <button type="submit">Submit</button>
+       
       </form>
+    </div>
       <div id="locationSales"></div>
     </main>
   </body>
