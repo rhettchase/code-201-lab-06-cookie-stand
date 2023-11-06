@@ -24,8 +24,7 @@ function CookieStand(
   avgCookies,
   hours,
   contact,
-  address,
-  email
+  address
 ) {
   this.name = name;
   this.minCustomers = minCustomers;
