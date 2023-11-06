@@ -24,7 +24,8 @@ function CookieStand(
   avgCookies,
   hours,
   contact,
-  address
+  address,
+  email
 ) {
   this.name = name;
   this.minCustomers = minCustomers;
@@ -34,6 +35,7 @@ function CookieStand(
   this.hours = hours;
   this.contact = contact;
   this.address = address;
+  this.email = `${name.toLowerCase()}` + `@salmoncookies.com`;
   this.hourlyCookies = this.estimate();
 }
 
@@ -314,6 +316,11 @@ CookieStand.prototype.renderInfo = function () {
   locationHeader.appendChild(locationAddress);
   locationAddress.classList.add('info');
   locationAddress.textContent = this.address;
+
+  const emailAddress = document.createElement('p');
+  locationHeader.appendChild(emailAddress);
+  locationAddress.classList.add('info');
+  emailAddress.textContent = this.email;
 };
 
 if (infoContainerElem) {

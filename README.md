@@ -1,4 +1,4 @@
-# LAB - 06 (class-06, class-07, class-08)
+# LAB - 06 (class-06, class-07, class-08, class-10)
 
 ## Salmon Cookie Stand
 
@@ -19,7 +19,7 @@ For the sales data, the application will need to be adaptable and able to add an
 
 ### Lighthouse Accessibility Report Score
 
-![Acessibility Score](img/accessibility-sales.png)
+![Acessibility Score](img/accessibility-index.png)
 
 ### Reflections and Comments
 
@@ -29,9 +29,3 @@ For the sales data, the application will need to be adaptable and able to add an
 - I used a `nested for loop` to iterate through each of the locations by the hour and total the total sales for each hour and calculate a cumulative total of sales
 - I converted the detailed information for each location (name, address, hours, contact) from hard code in the HTML to be *dynamically rendered* from the location objects
   - This required adding `if statements` to only render the information, `appendChild`, and call the rendering functions if the `document container element` was referenced on each page
-- I created a `form` to collect key information for new locations. This `input` *dynamically renders* a new row to the sales data table and recalculates the daily totals and overall total of cookies sold
-- The `.addEventListener` function takes in the values submitted by the user, checks them (using `if statements` to see if the following conditions are met
-  1. The location exists already on the cities array of cookie stand objects
-  2. If the max cookies is > than the min cookies
-- If either of these two conditions above are true, the user is alerted to resubmit and the form is prevented from being submitted using `.preventDefault()`
-- I used the `document.querySelector()` method to be able to render the footer repeatedly. The `renderfooter()` function was modified to remove the children of existing `tfoot` if the table footer already exists. If it does not exist, it creates the `tfoot` and continues on with the rest of the function
